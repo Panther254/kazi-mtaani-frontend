@@ -1,0 +1,63 @@
+.PostAJob{
+	display: flex;
+	flex-direction: column;
+	margin-top: 2em;
+	align-items: center;
+	position: relative;
+}
+
+.PostAJob>form{
+	width: 100%;
+}
+
+.PostAJob>form>.jobDetail{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2em;
+	width: 55%;
+}
+
+.PostAJob>form>.jobDetail>input{
+	outline: none;
+	border: 1px solid #009aee;
+	padding-left: 1.5em;
+	border-radius: 2em;
+}
+
+.PostAJob>form>.jobDetail>label{
+	margin-right: 2em;
+}
+
+.PostAJob>.btnContainer{
+	position: absolute;
+	display: flex;
+	justify-content: space-evenly;
+	width: 40%;
+	align-self: center;
+	/*background-color: green;*/
+	left: 10em;
+	bottom: -2em;
+	margin-top: 1em;
+}
+
+.btnContainer>button{
+	color: white;
+	border: none;
+	border-radius: 2em;
+	text-align: center;
+	width: 5em;
+	padding-right: .5em;
+	padding-left: .5em;
+}
+
+.btnContainer>button:hover{
+	cursor: pointer;
+}
+
+.cancelButton{
+	background-color: red;
+}
+
+.postButton{
+	background-color: #009aee;
+}

@@ -1,0 +1,132 @@
+.Login{
+	background-color: #009AEE;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding-top: auto;
+	padding-bottom: auto;
+	height: 100vh;
+	width: 100vw;
+}
+
+.login__container{
+	/*margin-top: auto;*/
+	/*margin-bottom: auto;*/
+	width: 80vw;
+	height: 95vh;
+	background-color: #f2f2f2;
+	border-radius: 2em;
+	display: flex;
+}
+
+.illustrator__container{
+	width: 50%;
+	/*background-color: #f2f2f2;*/
+
+}
+
+.login__details{
+	background-color: white;
+	border-radius: 2em;
+	/*border-bottom-left-radius: 2em;*/
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	border-left: 1px solid lightgrey;
+	padding-left: .5em;
+	padding-right: .5em;
+	justify-content: space-around;
+}
+
+.login__details > .login__prompt{
+	/*border-top-left-radius: 2em;*/
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-bottom: 1px solid #f2f2f2;
+	margin-bottom: .5em;
+	padding-bottom: .7em;
+	border-bottom-width: 80%;
+}
+
+.login__prompt> button{
+	margin-left: 2em;
+	/*margin-right: 1em;*/
+	border-radius: 2em;
+	border: 1px solid #009aee;
+	text-align: center;
+	color: #009aee;
+	width: fit-content;
+	padding: auto;
+}
+
+.login__prompt> button:hover{
+	cursor: pointer;
+	color: white;
+	background-color: #009aee;
+}
+
+.login__details > h3{
+	font-weight: bolder;
+	align-self: center;
+}
+
+.login__details > h4{
+	align-self: center;
+	font-weight: bolder;
+}
+
+.login__details > form{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+}
+
+.login__details > form > input{
+	border: 1px solid #009aee;
+	border-radius: 2em;
+	box-shadow: 0 .1em .1em;
+	outline: none;
+	margin-top: .5em;
+	margin-bottom: 2em;
+	padding-left: .8em;
+}
+
+.login__details > p{
+	font-weight: lighter;
+	align-self: center;
+}
+
+.login__details > button{
+	width: 10em;
+	background-color: #009aee;
+	padding: auto;
+	border-radius: 2em;
+	text-align: center;
+	align-self: center;
+	color: white;
+	border: none;
+}
+
+.login__details > button:hover{
+	cursor: pointer;
+}
+
+.login__details > .social__icons{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 40%;
+	align-self: center;
+	/*background-color: red;*/
+}
+
+.social__icons>svg{
+	width: 2em;
+	height: 2em;
+	/*border: 1px solid red;*/
+}
+
+.iconify:hover{
+	cursor: pointer;
+}

@@ -1,0 +1,121 @@
+ .SignUp{
+	background-color: #009AEE;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding-top: auto;
+	padding-bottom: auto;
+	height: 100vh;
+	width: 100vw;
+}
+
+.signUp__container{
+	width: 80vw;
+	height: 95vh;
+	background-color: #f2f2f2;
+	border-radius: 2em;
+	display: flex;
+}
+
+.illustrator__container{
+	width: 50%;
+}
+
+.signUp__details{
+	background-color: white;
+	border-radius: 2em;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	border-left: 1px solid lightgrey;
+	padding-left: .5em;
+	padding-right: .5em;
+	justify-content: space-around;
+}
+
+.signUp__details > .signUp__prompt{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-bottom: 1px solid #f2f2f2;
+	margin-bottom: .5em;
+	margin-top: .2em;
+	padding-bottom: .7em;
+	border-bottom-width: 80%;
+	padding-right: .7em;
+}
+
+.signUp__prompt>.iconify{
+	flex: 1;
+}
+
+.signUp__prompt> button{
+	margin-left: 2em;
+	border-radius: 2em;
+	border: 1px solid #009aee;
+	text-align: center;
+	color: #009aee;
+	width: fit-content;
+	padding: auto;
+}
+
+.signUp__prompt> button:hover{
+	cursor: pointer;
+	color: white;
+	background-color: #009aee;
+}
+
+.signUp__details > h3{
+	font-weight: bolder;
+	align-self: center;
+}
+
+.signUp__details > h4{
+	align-self: center;
+	font-weight: bolder;
+}
+
+.signUp__details > form{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+}
+
+/*.signUp__details > p{
+	font-weight: lighter;
+	align-self: center;
+}*/
+
+.signUp__details > .signUp__main{
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	margin-top: 5em;
+	flex: .8;
+	/*background-color: red;*/
+}
+
+.signUp__main>form{
+	display: inherit;
+	flex-direction: column;
+}
+
+.signUp__main>form>label>input{
+	margin-right: 1em;
+}
+
+.signUp__main > button{
+	width: 8em;
+	background-color: #009aee;
+	padding: auto;
+	border-radius: 2em;
+	text-align: center;
+	align-self: center;
+	color: white;
+	border: none;
+	margin-top: 2em;
+}
+
+.signUp__main > button:hover{
+	cursor: pointer;
+}

@@ -1,0 +1,80 @@
+.JobsPosted{
+	margin-top: 2em;
+	display: flex;
+	flex-direction: column;
+}
+
+table{
+	border-collapse: collapse;
+	box-sizing: border-box;
+}
+
+.JobsPosted>table>.selectedRow{
+	background-color: #c2c2c2;
+}
+
+.JobsPosted>table>thead>tr{
+	background-color: #f2f2f2;
+}
+
+.JobsPosted>table>thead>tr>th{
+	text-align: center;
+	padding: 1em;
+}
+
+.JobsPosted>table>tr{
+	background-color: #f2f2f2;
+}
+
+.JobsPosted>table>tr:hover{
+	background-color: white;
+}
+
+td{
+	text-align: center;
+	padding: 1em;
+}
+
+.JobsPosted>table>thead>tr>th{
+	border-bottom: 3em solid white;
+}
+
+.JobsPosted>table>tr>td{
+ 	border-bottom: 1em solid white;
+}
+
+.JobsPosted>button{
+	width: fit-content;
+	padding: .5em;
+	border-radius: 2em;
+	text-align: center;
+	background-color: #009aee;
+	color: white;
+	align-self: center;
+	border: none;
+	margin-top: 1em;
+}
+
+.JobsPosted>button:hover{
+	cursor: pointer;
+}
+
+.Modal {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background-color: #c2c2c2;
+    /*opacity: .8;*/
+  }
+
+  .Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f2f2f2;
+    opacity: 0.9;
+  }

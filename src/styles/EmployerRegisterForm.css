@@ -1,0 +1,38 @@
+.EmployerRegisterForm{
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	margin-top: 1em;
+	flex: .9;
+	/*background-color: red;*/
+}
+
+.EmployerRegisterForm>form>div{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1em;
+}
+
+.EmployerRegisterForm > button{
+	width: 8em;
+	background-color: #009aee;
+	padding: auto;
+	border-radius: 2em;
+	text-align: center;
+	align-self: center;
+	color: white;
+	border: none;
+	margin-top: 1em;
+}
+
+.EmployerRegisterForm > button:hover{
+	cursor: pointer;
+}
+
+.EmployerRegisterForm > form >div> input{
+	border: 1px solid #009aee;
+	border-radius: 2em;
+	box-shadow: 0 .1em .1em;
+	outline: none;
+	padding-left: .8em;
+}

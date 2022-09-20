@@ -1,0 +1,66 @@
+.JobSeekerProfile{
+	display: flex;
+	margin-top: 2em;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.JobSeekerProfile>form{
+	display: inherit;
+	flex-direction: column;
+	width: 100%;
+}
+
+.JobSeekerProfile>form>.jobSeekerDetails{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	width: 55%;
+}
+
+.jobSeekerDetails>label{
+	margin-right: 2em;
+}
+
+.jobSeekerDetails>input{
+	outline: none;
+	border: 1px solid #009aee;
+	border-radius: 2em;
+	margin-left: 2em;
+	padding-left: .8em;
+}
+
+.jobSeekerDetails>textarea{
+	margin-left: 2em;
+}
+
+.JobSeekerProfile>.buttonContainer > .btn{
+	width: fit-content;
+	border-radius: 2em;
+	background-color: #009aee;
+	color: white;
+	border: none;
+	padding:0.3em .8em 0.3em .8em;
+}
+
+.buttonContainer{
+	position: absolute;
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 1.5em;
+	width: 40%;
+	/*background-color: green;*/
+	left: 20%;
+	bottom: -2em;
+}
+
+.JobSeekerProfile>.buttonContainer>button:hover{
+	cursor: pointer;
+}
+
+.cancelBtn{
+	background-color: red !important;	
+
+}

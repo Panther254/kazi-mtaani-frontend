@@ -1,0 +1,50 @@
+.NavBar{
+	display: flex;
+	flex-direction: row;
+	background-color: #F2F2F2;
+	height: 10vh;
+	align-items: center;
+	padding: .4em;
+	/*margin-bottom: .;*/
+}
+
+.navbar__hamburgerIcon{
+ display: inherit;
+}
+
+.navbar__logo{
+ display: inherit;
+ flex: 1;
+}
+
+/*.navbar__auth{
+	display: inherit;
+}*/
+
+.navbar__profile,.navbar__auth{
+	flex: 0.2;
+	display: inherit;
+	align-items: center;
+	justify-content: center;
+}
+
+.navbar__auth > h5:hover{
+	cursor: pointer;
+}
+
+.navbar__profile > h5:hover{
+	cursor: pointer;
+}
+
+.navbar__postJob>button{
+	background-color: #009aee;
+	text-align: center;
+	color: white;
+	border-radius: 1em;
+	outline: none;
+	border: none;
+}
+
+.link:hover{
+	cursor: pointer;
+}

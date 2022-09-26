@@ -1,0 +1,61 @@
+.UpdateJob{
+	display: flex;
+	/*background-color: red;*/
+	flex-direction: column;
+}
+
+.UpdateJob >form > .inputItem{
+	display: flex;
+	flex-direction: column;
+	margin-top: 1em;
+	margin-left: 1em;
+}
+
+.UpdateJob> form:nth-child(1){
+	margin-top: 0;
+}
+
+.inputItem > h3 {
+	align-self: center;
+}
+
+.inputItem > input{
+	outline: none;
+	border: 1px solid #009aee;
+	padding-left: .8em;
+	border-radius: 2em;
+}
+
+.radioContainer{
+	display: flex;
+	margin-top: 1em;
+	margin-left: 1em;
+	width: fit-content;
+	/*justify-content: space-between;*/
+	/*background-color: blue;*/
+}
+
+.radioContainer>div{
+	display: flex;
+	align-items: center;
+	margin-right: 2em;
+}
+
+.radioContainer>div>input{
+	outline: none;
+	border: 1px solid #009aee;
+	padding-left: .8em;
+	border-radius: 2em;
+	margin-right: .5em;
+}
+
+.inputItem > button{
+	width: fit-content;
+	border-radius: 2em;
+	background-color: #009aee;
+	color: white;
+	border: none;
+	margin-bottom: 1em;
+	align-self: center;
+}
+

@@ -57,7 +57,6 @@ export default function ChangePassword() {
 	return (
 		<div className="changePassword">
 			<form>
-				<CSRFToken />
 				<div className="inputItem">
 					<label>Old Password:</label>
 					<input

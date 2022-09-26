@@ -99,7 +99,7 @@ function ProfileContent({ profile }) {
 
 	return (
 		<div className="JobSeekerProfile">
-			<form action="">
+			<form>
 				<div className="jobSeekerDetails">
 					<label>Full Name:</label>
 					<input

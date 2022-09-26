@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/JobsPosted.css";
 import axios from "axios";
 import ReactModal from "react-modal";
-import UpdateJob from './UpdateJob'
+import UpdateJob from "./UpdateJob";
 
 const JobsPosted = () => {
 	const initialState = {
@@ -54,7 +54,9 @@ const JobsPosted = () => {
 				</thead>
 				<tr
 					id="1"
-					className={`${state.selectedRow === "1" ? "selectedRow" : ""}`}
+					className={`${
+						state.selectedRow === "1" ? "selectedRow" : ""
+					}`}
 					onClick={handleClick}
 				>
 					<td>Sales Agent</td>
@@ -66,7 +68,9 @@ const JobsPosted = () => {
 				</tr>
 				<tr
 					id="2"
-					className={`${state.selectedRow === "2" ? "selectedRow" : ""}`}
+					className={`${
+						state.selectedRow === "2" ? "selectedRow" : ""
+					}`}
 					onClick={handleClick}
 				>
 					<td>Sales Agent</td>
@@ -78,7 +82,9 @@ const JobsPosted = () => {
 				</tr>
 				<tr
 					id="3"
-					className={`${state.selectedRow === "3" ? "selectedRow" : ""}`}
+					className={`${
+						state.selectedRow === "3" ? "selectedRow" : ""
+					}`}
 					onClick={handleClick}
 				>
 					<td>Sales Agent</td>
@@ -90,7 +96,9 @@ const JobsPosted = () => {
 				</tr>
 				<tr
 					id="4"
-					className={`${state.selectedRow === "4" ? "selectedRow" : ""}`}
+					className={`${
+						state.selectedRow === "4" ? "selectedRow" : ""
+					}`}
 					onClick={handleClick}
 				>
 					<td>Sales Agent</td>
@@ -102,7 +110,11 @@ const JobsPosted = () => {
 				</tr>
 			</table>
 
-			{state.selectedRow ? <button onClick={updateJob}>Update</button> : ""}
+			{state.selectedRow ? (
+				<button onClick={updateJob}>Update</button>
+			) : (
+				""
+			)}
 
 			<ReactModal
 				isOpen={state.showModal}
@@ -110,7 +122,9 @@ const JobsPosted = () => {
 				onRequestClose={(e) => setState({ ...state, showModal: false })}
 				className="Modal"
 				overlayClassName="Overlay"
+				appElement={document.getElementById("root")}
 			>
+				{" "}
 				<UpdateJob />
 				<button
 					onClick={(e) => setState({ ...state, showModal: false })}

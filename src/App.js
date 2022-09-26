@@ -8,7 +8,8 @@ import {
 import Profile from './components/Profile.js'
 import  Login from './components/Login.js'
 import  SignUp from './components/SignUp.js'
-
+import ForgotPassword from './components/ForgotPassword.js'
+import ResetPassword from './components/ResetPassword.js'
 
 
 
@@ -21,6 +22,8 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="login" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password/:uidb64/:token" element={<ResetPassword />} />
         </Routes>
       </Router>
     </div>

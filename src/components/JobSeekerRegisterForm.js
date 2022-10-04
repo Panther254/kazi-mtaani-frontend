@@ -2,6 +2,8 @@ import React,{ useState } from 'react'
 import '../styles/JobSeekerRegisterForm.css'
 import CSRFToken from './CSRFToken'
 import { useNavigate } from "react-router-dom"
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
 
 const JobSeekerRegisterForm = () => {
@@ -12,12 +14,83 @@ const JobSeekerRegisterForm = () => {
 		phone_number: "",
 		email: "",
 		password: "",
-		confirmPassword: ""
+		re_password: ""
 	})
 
-	const register =(e)=>{
-		alert("Data Sent to Backend!")
-		navigate('/login')
+	const isFormValid = formData =>{
+		if (formData.username ==="") {
+			return false
+		} else if(formData.national_id ===""){
+			return false
+
+		} else if(formData.phone_number ===""){
+			return false
+		
+		} else if(formData.email ===""){
+			return false
+		
+		} else if(formData.password ===""){
+			return false
+		
+		} else if(formData.re_password ===""){
+			return false
+		}else if(formData.re_password !== formData.password){
+			alert("Both passwords should match.")
+			return false
+		}else{
+			return true
+		}
+	}
+
+	const register = async (e)=>{
+		e.preventDefault()
+
+		if(isFormValid(data)){
+			const names = data.username.split(" ");
+				
+			let lastName = "";
+			
+			names.forEach((name) => {
+				lastName = lastName.concat(name).concat(" ");
+			});
+
+			const body = JSON.stringify({ ...data, first_name:names[0],last_name: lastName.trim() });
+
+			console.log('body: ', body)
+
+	        const config = { 
+	            headers: {
+	                Accept: "application/json",
+	                "Content-Type": "application/json",
+	                "X-CSRFToken": Cookies.get("csrftoken"),
+	            },
+	        };
+
+
+			try {
+	            const res = await axios.post(
+	                'http://localhost:8000/users/register',
+	                body,
+	                config
+	            );
+
+	            console.log("Respose obejct: ", res);
+
+	            if (res.data.error) {
+	                alert(res.data.error);
+	            } else if(res.data.success) {
+	                console.log("Account register view says: ", res.data.success);
+
+	                navigate('/login')
+	            }
+	        } catch (error) {
+	            alert(error)
+	        }
+
+		}else{
+			alert("Kindly fill in all the fields correctly first.")
+		}
+
 	}
 
 	return (
@@ -46,7 +119,7 @@ const JobSeekerRegisterForm = () => {
 				</div>
 				<div>
 					<label>Confirm Password:</label>
-					<input type="password" value={data.confirmPassword} onChange={(e)=> setData({...data,confirmPassword: e.target.value})} required/>
+					<input type="password" value={data.re_password} onChange={(e)=> setData({...data,re_password: e.target.value})} required/>
 				</div>
 			</form>
 			<button onClick={register}>Sign Up</button>

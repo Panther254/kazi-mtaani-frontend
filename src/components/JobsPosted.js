@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "../styles/JobsPosted.css";
 import axios from "axios";
-import ReactModal from "react-modal";
-import UpdateJob from "./UpdateJob";
 
-const JobsPosted = () => {
+
+const JobsPosted = ({ handler }) => {
 	const initialState = {
-		showModal: false,
 		selectedRow: "",
 		jobs: [],
 	};
 
 	const [state, setState] = useState(initialState);
 
-	let detailsToUpdate = {};
-
-	const updateJob = (e) => {
-		e.preventDefault();
-		// detailsToUpdate = state.jobs.find((job) => job.id === state.selectedRow);
-		// console.log("detailsToUpdate: ", detailsToUpdate);
-		setState({ ...state, showModal: true });
-	};
 
 	const handleClick = (e) => {
 		const key = e.currentTarget.id;
 		setState({ ...state, selectedRow: key });
+		handler({
+			selectedRow: key,
+			selectedJob: state.jobs.find((job) => job.id === state.selectedRow)
+		})
+
 	};
 
 	useEffect(() => {
@@ -109,29 +104,6 @@ const JobsPosted = () => {
 					<td>No</td>
 				</tr>
 			</table>
-
-			{state.selectedRow ? (
-				<button onClick={updateJob}>Update</button>
-			) : (
-				""
-			)}
-
-			<ReactModal
-				isOpen={state.showModal}
-				contentLabel="Update job Details"
-				onRequestClose={(e) => setState({ ...state, showModal: false })}
-				className="Modal"
-				overlayClassName="Overlay"
-				appElement={document.getElementById("root")}
-			>
-				{" "}
-				<UpdateJob />
-				<button
-					onClick={(e) => setState({ ...state, showModal: false })}
-				>
-					Close
-				</button>
-			</ReactModal>
 		</div>
 	);
 };

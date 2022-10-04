@@ -1,0 +1,46 @@
+.AcceptApplications{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	/*background-color: red;*/
+}
+
+.AcceptApplications > h3{
+	align-self: center;
+	margin-bottom: 2em;
+}
+
+.AcceptApplications>p{
+	margin-bottom: 1em;
+}
+
+.AcceptApplicationsInputs>input{
+	border: 1px solid #009aee;
+	outline: none;
+	padding-left: 1em;
+	border-radius: 1em;
+	height: 1.5em;
+	text-align: center;
+	margin-top: .8em;
+}
+
+.AcceptApplications>form{
+	display: inherit;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.AcceptApplications > form>button{
+	background-color: #009aee;
+	border: none;
+	border-radius: 1em;
+	width: fit-content;
+	padding: .3em;
+	margin-top: 1em;
+	color: white;
+}
+
+button{
+	cursor: pointer;
+}

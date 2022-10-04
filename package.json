@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf ../kazi-mtaani-backend/core/build && react-scripts build && cp -r build ../kazi-mtaani-backend/core/build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

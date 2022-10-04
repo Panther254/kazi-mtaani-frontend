@@ -42,6 +42,7 @@
 }
 
 .profile__main{
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	padding-top: .5em;
@@ -66,4 +67,32 @@
 	position: absolute;
 	bottom: .9em;
 	height: 38%;
+}
+
+.jobsButton{
+	position: absolute;
+	z-index: 999;
+	display: flex;
+	width: 100%;
+	/*background-color: red;*/
+	align-content: center;
+	justify-content: space-evenly;
+	padding: .5em;
+	bottom: 2em;
+}
+
+.profile__main > .jobsButton > button{
+	width: fit-content;
+	padding: .5em;
+	border-radius: 2em;
+	text-align: center;
+	background-color: #009aee;
+	color: white;
+	align-self: center;
+	border: none;
+	/*margin-top: 1em;*/
+}
+
+.jobsButon>button:hover{
+	cursor: pointer;
 }

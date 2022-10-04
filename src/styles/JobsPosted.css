@@ -43,21 +43,6 @@ td{
  	border-bottom: 1em solid white;
 }
 
-.JobsPosted>button{
-	width: fit-content;
-	padding: .5em;
-	border-radius: 2em;
-	text-align: center;
-	background-color: #009aee;
-	color: white;
-	align-self: center;
-	border: none;
-	margin-top: 1em;
-}
-
-.JobsPosted>button:hover{
-	cursor: pointer;
-}
 
 .Modal {
     position: absolute;
@@ -91,9 +76,10 @@ td{
   	color: white;
   	border-radius: 2em;
   	width: fit-content;
-  	padding: auto;
+  	padding: .6em;
   	align-self: center;
-
+  	text-align: center;
+  	border: none;
   }
 
   .Modal > button:hover{

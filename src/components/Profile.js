@@ -11,6 +11,9 @@ import ChangePassword from './ChangePassword'
 import Footer from './Footer'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import ReactModal from "react-modal";
+import UpdateJob from "./UpdateJob";
+import AcceptApplications from './AcceptApplications'
 
 
 function Profile() {
@@ -36,6 +39,25 @@ function Profile() {
 	const navigate = useNavigate();
 
 	const [selected, setSelected] = useState(initialState);
+
+	const [state, setState] = useState({
+		selectedRow: "",
+		jobUpdate: false,
+		acceptApplications: false,
+		selectedJob:{}
+	})
+
+
+	const updateJob = (e) => {
+		e.preventDefault();
+		setState({ ...state, jobUpdate: true, acceptApplications: false });
+	};
+
+	const applicationsAccept = e =>{
+		e.preventDefault();
+		setState({ ...state, jobUpdate: false, acceptApplications: true });
+
+	}
 
 	const logOut = async (e) =>{
 		const yes = window.confirm("Are you sure you want to log out?")
@@ -116,14 +138,57 @@ function Profile() {
 				<div className="main__contentSection">
 					{selected.profile ? (<ProfileContent profile={tempProfile} />) : ""}
 					{selected.jobsApplied ? (<JobSeekerJobsApplied />) : ""}
-					{selected.jobsPosted ? (<JobsPosted />) : ""}
+					{selected.jobsPosted ? (<JobsPosted handler={setState} />) : ""}
 					{selected.postAJob ? (<PostAJob />) : ""}
 					{selected.changePassword ? (<ChangePassword />) : ""}
 				</div>
+
+				{state.selectedRow && selected.jobsPosted? (<div className="jobsButton">
+					<button onClick={updateJob}>Update</button>
+					<button onClick={applicationsAccept}>Accept Applications</button>
+					</div>
+				) : (
+					""
+				)}
 			</div>
-			<div className="ProfileFooter">
+
+		
+
+			<ReactModal
+				isOpen={state.jobUpdate}
+				contentLabel="Update job Details"
+				onRequestClose={(e) => setState({ ...state, showModal: false })}
+				className="Modal"
+				overlayClassName="Overlay"
+				appElement={document.getElementById("root")}
+			>
+				<UpdateJob jobDetails={state.selectedJob}/>
+				<button
+					onClick={(e) => setState({ ...state, jobUpdate: false })}
+				>
+					Close
+				</button>
+			</ReactModal>
+
+			<ReactModal
+				isOpen={state.acceptApplications}
+				contentLabel="Update job Details"
+				onRequestClose={(e) => setState({ ...state, showModal: false })}
+				className="Modal"
+				overlayClassName="Overlay"
+				appElement={document.getElementById("root")}
+			>
+				<AcceptApplications jobDetails={state.selectedJob}/>
+				<button
+					onClick={(e) => setState({ ...state, acceptApplications: false })}
+				>
+					Close
+				</button>
+			</ReactModal>
+
+			{tempProfile.is_staff?"":(<div className="ProfileFooter">
 				<Footer />
-			</div>
+			</div>)}
 		</div>
 	);
 }

@@ -3,8 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import "../styles/Login.css";
 // import { Icon } from "@iconify/react";
 import { useStateValue } from "../DataStore";
-// import { actionTypes } from "../reducer";
+import { actionTypes } from "../reducer";
 import CSRFToken from "./CSRFToken";
+import axios from "axios";
+import Cookies from 'js-cookie'
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -12,9 +14,60 @@ function Login() {
     const [, dispatch] = useStateValue();
     const navigate = useNavigate();
 
-    const signIn = () => {
-        alert("Data Sent To Backend");
-        navigate("/profile");
+    const signIn = async (e) => {
+        e.preventDefault();
+        
+        const body = JSON.stringify({
+           password: password,
+           email: email
+        });
+
+        const config = {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get("csrftoken"),
+            },
+        };
+
+        try {
+            const res = await axios.post(
+                'http://localhost:8000/users/login',
+                body,
+                config
+            );
+
+            console.log("Respose obejct: ", res);
+
+            if (res.data.error) {
+                alert(res.data.error);
+            } else if(res.data.success) {
+                console.log("Job Updated successfully from server: ", res.data.success);
+
+                axios.get('http://localhost:8000/users/profile').then((response) => {
+                    console.log("user profile",response.data)
+                    dispatch({
+                        type: actionTypes.LOGIN_SUCCESS,
+                        payload: {
+                            isAuthenticated: true,
+                            profile: response.data
+                        }
+                     })
+                    setEmail("")
+                    setPassword("")
+                    navigate("/profile");
+                }).catch((error) =>{
+                    console.log(error)
+                    alert("Something went wrong. Try again")
+                    setEmail("")
+                    setPassword("")
+                })
+            }
+        } catch (error) {
+            alert(error)
+            setEmail("")
+            setPassword("")
+        }
     };
 
     return (
@@ -45,7 +98,10 @@ function Login() {
                         />
                     </form>
                     <button onClick={signIn}> Sign In </button>
-                    <p>Forgot password ? <Link to="/forgot-password">click here</Link> </p>
+                    <p>
+                        Forgot password ?{" "}
+                        <Link to="/forgot-password">click here</Link>{" "}
+                    </p>
                 </div>
             </div>
         </div>

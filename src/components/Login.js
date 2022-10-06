@@ -6,7 +6,7 @@ import { useStateValue } from "../DataStore";
 import { actionTypes } from "../reducer";
 import CSRFToken from "./CSRFToken";
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -16,10 +16,10 @@ function Login() {
 
     const signIn = async (e) => {
         e.preventDefault();
-        
+
         const body = JSON.stringify({
-           password: password,
-           email: email
+            password: password,
+            email: email,
         });
 
         const config = {
@@ -32,7 +32,7 @@ function Login() {
 
         try {
             const res = await axios.post(
-                'http://localhost:8000/users/login',
+                "http://localhost:8000/users/login",
                 body,
                 config
             );
@@ -41,32 +41,22 @@ function Login() {
 
             if (res.data.error) {
                 alert(res.data.error);
-            } else if(res.data.success) {
-                console.log("Job Updated successfully from server: ", res.data.success);
-
-                axios.get('http://localhost:8000/users/profile').then((response) => {
-                    console.log("user profile",response.data)
-                    dispatch({
-                        type: actionTypes.LOGIN_SUCCESS,
-                        payload: {
-                            isAuthenticated: true,
-                            profile: response.data
-                        }
-                     })
-                    setEmail("")
-                    setPassword("")
-                    navigate("/profile");
-                }).catch((error) =>{
-                    console.log(error)
-                    alert("Something went wrong. Try again")
-                    setEmail("")
-                    setPassword("")
-                })
+            } else if (res.data.success) {
+                console.log(
+                    "Login successfully from server: ",
+                    res.data.success
+                );
+                dispatch({
+                    type: actionTypes.LOGIN_SUCCESS,
+                });
+                setEmail("");
+                setPassword("");
+                navigate("/");
             }
         } catch (error) {
-            alert(error)
-            setEmail("")
-            setPassword("")
+            alert(error);
+            setEmail("");
+            setPassword("");
         }
     };
 

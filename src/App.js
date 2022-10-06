@@ -18,14 +18,15 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signUp" element={<SignUp />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="reset-password/:uidb64/:token" element={<ResetPassword />} />
+            <Route path="/" element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signUp" element={<SignUp />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="reset-password/:uidb64/:token" element={<ResetPassword />} />
         </Routes>
       </Router>
+      
     </div>
   );
 }

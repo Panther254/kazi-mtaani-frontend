@@ -90,7 +90,7 @@ function ProfileContent({ profile }) {
 			username: `${first_name} ${last_name}`,
 			email: email,
 			phoneNumber: phone_number,
-			residence: residence,
+			residence: residence === null ? "":residence,
 			editable: false,
 		};
 

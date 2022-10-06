@@ -4,25 +4,64 @@ import "../styles/NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useStateValue } from "../DataStore";
 import { actionTypes } from "../reducer";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const NavBar = () => {
 	const navigate = useNavigate();
-	const [{ user }, dispatch] = useStateValue();
+	const [{ profile }, dispatch] = useStateValue();
 
 	const postJob = () => {
-		if (!user) {
+		if (!profile) {
 			alert("You Need To Sign in First");
 		} else {
 			navigate("/profile");
 		}
 	};
 
-	const logOut = () => {
-		console.log("You have logged out");
+	const logOut = async (e) => {
+		const yes = window.confirm("Are you sure you want to log out?");
+
+		if (yes) {
+			const config = {
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+					"X-CSRFToken": Cookies.get("csrftoken"),
+				},
+			};
+
+			const body = JSON.stringify({
+				data: "logout",
+			});
+
+			try {
+				const res = await axios.post(
+					'http://localhost:8000/users/logout',
+					body,
+					config
+				);
+
+				const { success, error } = res.data;
+
+				if (success) {
+					alert(success);
+					dispatch({
+						type: actionTypes.LOGOUT_SUCCESS,
+					});
+					navigate("/")
+				} else {
+					alert(error);
+				}
+			} catch (error) {
+				// alert("Something went wrong. Failed to log out");
+				alert(error)
+			}
+		}
 	};
 
 	const validate = () => {
-		if (!user) {
+		if (!profile) {
 			alert("You Need to be Signed in First");
 			navigate("/login");
 		} else {
@@ -37,7 +76,7 @@ const NavBar = () => {
 			</div>
 			<div className="navbar__logo"></div>
 			<div className="navbar__auth">
-				{user ? (
+				{profile ? (
 					<h5 onClick={logOut}>Sign Out</h5>
 				) : (
 					<h5 onClick={() => navigate("/login")}>Sign In</h5>
@@ -46,7 +85,7 @@ const NavBar = () => {
 			<div className="navbar__profile">
 				<h5 onClick={validate}>Profile</h5>
 			</div>
-			{user ? (
+			{profile ? (
 				<div className="navbar__postJob">
 					<button onClick={postJob} className="link">
 						Post Job

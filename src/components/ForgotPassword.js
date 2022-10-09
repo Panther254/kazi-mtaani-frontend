@@ -3,6 +3,7 @@ import CSRFToken from "./CSRFToken.js";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import '../styles/ForgotPassword.css'
 
 export default function ForgotPassword() {
 	const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function ForgotPassword() {
 	const submitForm = async (e) => {
 		e.preventDefault();
 		if (state !== "") {
+			
 			const body = JSON.stringify({
 				email: state,
 			});
@@ -18,14 +20,14 @@ export default function ForgotPassword() {
 			const config = {
 				headers: {
 					Accept: "application/json",
-					"Content-Type": "application.json",
+					"Content-Type": "application/json",
 					"X-CSRFToken": Cookies.get("csrftoken"),
 				},
 			};
 
 			try {
 				const response = await axios.post(
-					"http://localhost/users/reset-password",
+					'http://localhost:8000/users/reset-password',
 					body,
 					config
 				);
@@ -38,7 +40,7 @@ export default function ForgotPassword() {
 				setState("");
 			} catch (error) {
 				console.log("Something went wrong.Try again later");
-				console.log(error.data.error);
+				alert(error);
 				setState("");
 			}
 		} else {
@@ -55,7 +57,7 @@ export default function ForgotPassword() {
 			<form onSubmit={submitForm}>
 				<CSRFToken />
 				<div className="forgotPasswordDetails">
-					<label>Password:</label>
+					<label>Email:</label>
 					<input
 						type="email"
 						name="email"

@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useStateValue } from "../DataStore.js";
-import { actionTypes } from '../reducer'
+import { actionTypes } from "../reducer";
 
-function Layout({ children }) {
-	const [, dispatch] = useStateValue();
-
-	const navigate = useNavigate();
+function Layout() {
+	const [{isAuthenticated}, dispatch] = useStateValue();
 
 	useEffect(() => {
 		axios
@@ -32,20 +30,19 @@ function Layout({ children }) {
 							console.log(error);
 							alert("Something went wrong. Try again");
 						});
-					navigate('/')
 				} else {
 					dispatch({
 						type: actionTypes.USER_LOADED_FAIL,
 					});
-					navigate("/login");
 				}
 			})
 			.catch((error) => {
-				alert(error);
-				navigate("/login");
+				dispatch({
+					type: actionTypes.USER_LOADED_FAIL,
+				});
 			});
-	}, []);
-	return <>{children}</>;
+	}, [isAuthenticated, dispatch]);
+	return <Outlet />;
 }
 
 export default Layout;

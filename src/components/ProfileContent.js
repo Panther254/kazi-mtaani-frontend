@@ -32,8 +32,6 @@ function ProfileContent({ profile }) {
 			"You Are About To Change Your Details, Are You Sure?"
 		);
 		if (yes) {
-
-			alert("Data Sent To Backend For Processing,Please Wait");
 			
 			const names = state.username.split(" ");
 			
@@ -73,10 +71,10 @@ function ProfileContent({ profile }) {
 				alert(res.data.error)
 			} else {
 				console.log("Update profile Data from server: ", res.data)
-				// dispatch({
-				// 	type: actionTypes.PROFILEUPDATE_SUCCESS,
-				// 	payload: res.data
-				// })
+				dispatch({
+					type: actionTypes.PROFILEUPDATE_SUCCESS,
+					payload: res.data
+				})
 
 			}
 		}

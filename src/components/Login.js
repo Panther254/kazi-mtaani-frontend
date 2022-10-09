@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import "../styles/Login.css";
 // import { Icon } from "@iconify/react";
 import { useStateValue } from "../DataStore";
@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [, dispatch] = useStateValue();
+    const [{ isAuthenticated }, dispatch] = useStateValue();
     const navigate = useNavigate();
 
     const signIn = async (e) => {
@@ -62,38 +62,42 @@ function Login() {
 
     return (
         <div className="Login">
-            <div className="login__container">
-                <div className="illustrator__container"></div>
-                <div className="login__details">
-                    <div className="login__prompt">
-                        <p> Don 't Have An Account?</p>
-                        <button onClick={() => navigate("../signUp")}>
-                            Sign Up
-                        </button>
+            {isAuthenticated ? (
+                <Navigate to="/" />
+            ) : (
+                <div className="login__container">
+                    <div className="illustrator__container"></div>
+                    <div className="login__details">
+                        <div className="login__prompt">
+                            <p> Don 't Have An Account?</p>
+                            <button onClick={() => navigate("../signUp")}>
+                                Sign Up
+                            </button>
+                        </div>
+                        <h3> Welcome To Jobs - Hub </h3> <h4> Sign In </h4>
+                        <form onSubmit={signIn}>
+                            <CSRFToken />
+                            <label> Email: </label>
+                            <input
+                                type="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />{" "}
+                            <label> Password: </label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </form>
+                        <button onClick={signIn}> Sign In </button>
+                        <p>
+                            Forgot password ?{" "}
+                            <Link to="/forgot-password">click here</Link>{" "}
+                        </p>
                     </div>
-                    <h3> Welcome To Jobs - Hub </h3> <h4> Sign In </h4>
-                    <form onSubmit={signIn}>
-                        <CSRFToken />
-                        <label> Email: </label>
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />{" "}
-                        <label> Password: </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </form>
-                    <button onClick={signIn}> Sign In </button>
-                    <p>
-                        Forgot password ?{" "}
-                        <Link to="/forgot-password">click here</Link>{" "}
-                    </p>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

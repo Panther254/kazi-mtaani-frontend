@@ -17,9 +17,6 @@
  flex: 1;
 }
 
-/*.navbar__auth{
-	display: inherit;
-}*/
 
 .navbar__profile,.navbar__auth{
 	flex: 0.2;
@@ -43,6 +40,8 @@
 	border-radius: 1em;
 	outline: none;
 	border: none;
+	padding-right: .8em;
+	padding-left: .8em;
 }
 
 .link:hover{

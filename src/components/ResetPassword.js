@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CSRFToken from "./CSRFToken";
 import Cookies from "js-cookie";
+import '../styles/ResetPassword.css'
 
 function ResetPassword() {
 	const [formVisible, setFormVisible] = useState(false);
@@ -24,14 +25,14 @@ function ResetPassword() {
 			const config = {
 				headers: {
 					Accept: "application/json",
-					"Content-Type": "application.json",
+					"Content-Type": "application/json",
 					"X-CSRFToken": Cookies.get("csrftoken"),
 				},
 			};
 
 			try {
-				const response = await axios.post(
-					"http://localhost/users/reset-password-complete",
+				const response = await axios.put(
+					'http://localhost:8000/users/reset-password-complete',
 					body,
 					config
 				);
@@ -44,7 +45,7 @@ function ResetPassword() {
 					alert(error);
 				}
 			} catch (error) {
-				console.log("Error", error.data);
+				console.log("Error", error);
 			}
 		} else {
 			alert("Enter the password first");
@@ -54,7 +55,7 @@ function ResetPassword() {
 	useEffect(() => {
 		axios
 			.get(
-				`http://localhost/users/reset-password-confirm/${uidb64}/${token}/`
+				`http://localhost:8000/users/reset-password-confirm/${uidb64}/${token}/`
 			)
 			.then((response) => {
 				const { success, error } = response.data;
@@ -67,7 +68,7 @@ function ResetPassword() {
 				}
 			})
 			.catch((error) => {
-				console.log("Error", error.data.error);
+				console.log("Error", error);
 			});
 	}, []);
 
@@ -85,12 +86,12 @@ function ResetPassword() {
 							onChange={(e) => setPassword(e.target.value)}
 							required
 						/>
-						<button onClick={submit}>Submit</button>
 					</div>
+					<button onClick={submit}>Submit</button>
 				</form>
 			) : (
 				<div className="resetPassswordNoForm">
-					<p>Waiting for Server Confirmation</p>
+					<p>Waiting for server confirmation</p>
 				</div>
 			)}
 		</div>

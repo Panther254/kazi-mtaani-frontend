@@ -9,15 +9,9 @@ import Cookies from "js-cookie";
 
 const NavBar = () => {
 	const navigate = useNavigate();
-	const [{ profile }, dispatch] = useStateValue();
+	const [{ isAuthenticated }, dispatch] = useStateValue();
 
-	const postJob = () => {
-		if (!profile) {
-			alert("You Need To Sign in First");
-		} else {
-			navigate("/profile");
-		}
-	};
+	
 
 	const logOut = async (e) => {
 		const yes = window.confirm("Are you sure you want to log out?");
@@ -61,7 +55,7 @@ const NavBar = () => {
 	};
 
 	const validate = () => {
-		if (!profile) {
+		if (!isAuthenticated) {
 			alert("You Need to be Signed in First");
 			navigate("/login");
 		} else {
@@ -76,7 +70,7 @@ const NavBar = () => {
 			</div>
 			<div className="navbar__logo"></div>
 			<div className="navbar__auth">
-				{profile ? (
+				{isAuthenticated ? (
 					<h5 onClick={logOut}>Sign Out</h5>
 				) : (
 					<h5 onClick={() => navigate("/login")}>Sign In</h5>
@@ -85,13 +79,6 @@ const NavBar = () => {
 			<div className="navbar__profile">
 				<h5 onClick={validate}>Profile</h5>
 			</div>
-			{profile ? (
-				<div className="navbar__postJob">
-					<button onClick={postJob} className="link">
-						Post Job
-					</button>
-				</div>
-			) : null}
 		</div>
 	);
 };

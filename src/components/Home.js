@@ -9,10 +9,10 @@ import { useStateValue } from "../DataStore";
 
 const Home = () => {
 	const navigate = useNavigate();
-	const [{ user }] = useStateValue();
+	const [{ isAuthenticated },] = useStateValue();
 
 	const getStarted = () => {
-		if (user) {
+		if (isAuthenticated) {
 			navigate("/profile");
 		} else {
 			navigate("login");

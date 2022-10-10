@@ -5,7 +5,7 @@ import { useStateValue } from "../DataStore.js";
 import { actionTypes } from "../reducer";
 
 function Layout() {
-	const [{isAuthenticated}, dispatch] = useStateValue();
+	const [{ isAuthenticated, profile}, dispatch] = useStateValue();
 
 	useEffect(() => {
 		axios
@@ -41,7 +41,7 @@ function Layout() {
 					type: actionTypes.USER_LOADED_FAIL,
 				});
 			});
-	}, [isAuthenticated, dispatch]);
+	}, [isAuthenticated, dispatch,profile]);
 	return <Outlet />;
 }
 

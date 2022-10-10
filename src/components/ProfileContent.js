@@ -38,7 +38,8 @@ function ProfileContent({ profile }) {
 			let lastName = "";
 			
 			names.forEach((name) => {
-				lastName = lastName.concat(name).concat(" ");
+				if(name !== names[0])
+					lastName = lastName.concat(name).concat(" ");
 			});
 
 			lastName.trim();
@@ -73,7 +74,10 @@ function ProfileContent({ profile }) {
 				console.log("Update profile Data from server: ", res.data)
 				dispatch({
 					type: actionTypes.PROFILEUPDATE_SUCCESS,
-					payload: res.data
+					payload: {
+						isAuthenticated: true,
+						profile: res.data
+					}
 				})
 
 			}

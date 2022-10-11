@@ -41,7 +41,7 @@ function Layout() {
 					type: actionTypes.USER_LOADED_FAIL,
 				});
 			});
-	}, [isAuthenticated, dispatch,profile]);
+	}, [isAuthenticated, dispatch]);
 	return <Outlet />;
 }
 

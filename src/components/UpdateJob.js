@@ -3,13 +3,13 @@ import "../styles/UpdateJob.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-function UpdateJob({ jobDetails }) {
+function UpdateJob({ jobDetails,handler }) {
 	const initialState = {
-		id: "",
-		position: "",
-		jobType: "",
-		sector: "",
-		availability: false,
+		id: jobDetails?.id,
+		position: jobDetails?.position,
+		jobType: jobDetails?.job_type,
+		sector: jobDetails?.sector,
+		availability: jobDetails?.is_available,
 	};
 
 	const [state, setState] = useState(initialState);
@@ -44,8 +44,8 @@ function UpdateJob({ jobDetails }) {
 			availability !== ""
 		) {
 			if (
-				jobType.toLowerCase() === "full time" ||
-				jobType.toLowerCase() === "part time"
+				jobType.toLowerCase() === "full-time" ||
+				jobType.toLowerCase() === "part-time"
 			) {
 				
 				const body = JSON.stringify({
@@ -65,7 +65,7 @@ function UpdateJob({ jobDetails }) {
 
 				try {
 					const res = await axios.patch(
-						`http://localhost:8000/jobs/etrieve-update/${id}`,
+						`http://localhost:8000/jobs/retrieve-update/${id}`,
 						body,
 						config
 					);
@@ -79,12 +79,13 @@ function UpdateJob({ jobDetails }) {
 							"Job Updated successfully from server: ",
 							res.data
 						);
+						handler(prevState=>({ ...prevState,...res.data}))
 					}
 				} catch (error) {
 					console.log("Error: ", error);
 				}
 			} else {
-				alert("The Job Type field should be Full time or Part time");
+				alert("The Job Type field should be strictly Full-time or Part-time");
 			}
 		} else {
 			alert("Please fill in all the fields in the form.");
@@ -114,7 +115,7 @@ function UpdateJob({ jobDetails }) {
 						type="text"
 						value={state.jobType}
 						onChange={handleChange}
-						placeholder="Full time/Part time"
+						placeholder="Full-time/Part-time"
 					/>
 				</div>
 

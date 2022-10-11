@@ -19,11 +19,11 @@ const Job = ({ position, id, dataPosted, jobType, sector, isAccepted, dataApplie
 			}
 		}
 
-		axios.post('', body, config)
+		await axios.post("http://localhost:8000/jobs/apply-job", body, config)
 		.then(res=>{
-			console.log('Apply job response', res)
+			console.log('Apply job response', res.data)
 		}).catch(error=>{
-			alert(error.data.error)
+			alert(error)
 		})
 	}
 
@@ -39,6 +39,9 @@ const Job = ({ position, id, dataPosted, jobType, sector, isAccepted, dataApplie
 				<p>Full-Time</p>
 				<p>Fintech | IT</p>
 				<p>⭐⭐⭐⭐</p>
+			</div>
+			<div className="job__apply">
+				<button onClick={appyJob}>Apply Job</button>
 			</div>
 		</div>
 	)

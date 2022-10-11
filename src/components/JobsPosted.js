@@ -14,11 +14,11 @@ const JobsPosted = ({ handler }) => {
 
 	const handleClick = (e) => {
 		const key = e.currentTarget.id;
-		setState({ ...state, selectedRow: key });
-		handler({
-			selectedRow: key,
-			selectedJob: state.jobs.find((job) => job.id === state.selectedRow)
-		})
+		setState({ ...state, selectedRow: "".concat(key) });
+		console.log("key",key)
+		const clickedJob = state.jobs.find((job) => (job?.id == key))
+		console.log('clickedJob', clickedJob)
+		handler(prevState=>({ ...prevState,selectedRow: key, selectedJob: clickedJob}))
 
 	};
 
@@ -27,7 +27,7 @@ const JobsPosted = ({ handler }) => {
 			.get("http://localhost:8000/jobs/list-posted-jobs")
 			.then((response) => {
 				console.log("Jobs posted:  ", response.data);
-				setState({ ...state, jobs: response.data });
+				setState(prevState=>({ ...prevState, jobs: response.data }));
 			})
 			.catch((error) => {
 				console.log(error.data.error);
@@ -47,62 +47,24 @@ const JobsPosted = ({ handler }) => {
 						<th>Available</th>
 					</tr>
 				</thead>
-				<tr
-					id="1"
-					className={`${
-						state.selectedRow === "1" ? "selectedRow" : ""
-					}`}
-					onClick={handleClick}
-				>
-					<td>Sales Agent</td>
-					<td>Full-Time</td>
-					<td>12/02/2019</td>
-					<td>Agriculture</td>
-					<td>Eldoret</td>
-					<td>No</td>
-				</tr>
-				<tr
-					id="2"
-					className={`${
-						state.selectedRow === "2" ? "selectedRow" : ""
-					}`}
-					onClick={handleClick}
-				>
-					<td>Sales Agent</td>
-					<td>Full-Time</td>
-					<td>12/02/2019</td>
-					<td>Agriculture</td>
-					<td>Eldoret</td>
-					<td>No</td>
-				</tr>
-				<tr
-					id="3"
-					className={`${
-						state.selectedRow === "3" ? "selectedRow" : ""
-					}`}
-					onClick={handleClick}
-				>
-					<td>Sales Agent</td>
-					<td>Full-Time</td>
-					<td>12/02/2019</td>
-					<td>Agriculture</td>
-					<td>Eldoret</td>
-					<td>No</td>
-				</tr>
-				<tr
-					id="4"
-					className={`${
-						state.selectedRow === "4" ? "selectedRow" : ""
-					}`}
-					onClick={handleClick}
-				>
-					<td>Sales Agent</td>
-					<td>Full-Time</td>
-					<td>12/02/2019</td>
-					<td>Agriculture</td>
-					<td>Eldoret</td>
-					<td>No</td>
-				</tr>
+				{state.jobs.map(job=>(
+					<tr
+						id={`${job?.id}`}
+						className={`${
+							state.selectedRow === "".concat(job?.id) ? "selectedRow" : ""
+						}`}
+						onClick={handleClick}
+						key={job?.id}
+					>
+						<td>{job?.position}</td>
+						<td>{job?.job_type}</td>
+						<td>{job?.date_posted}</td>
+						<td>{job?.sector}</td>
+						<td>{job?.location}</td>
+						<td>{`${job?.is_available? "Yes":"No"}`}</td>
+					</tr>
+					))	
+				}
 			</table>
 		</div>
 	);

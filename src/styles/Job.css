@@ -10,3 +10,26 @@
 	margin-right: 2em;
 
 }
+
+.job__apply{
+	display: flex;
+	/*background-color: red;*/
+	flex-direction: row-reverse;
+	flex: 1;
+	padding-right: .5em;
+}
+
+.job__apply>button{
+	height: fit-content;
+	margin-top: 1em;
+	border: 1px solid #009aee;
+	border-radius: 1em;
+	outline: none;
+	color: #009aee;
+	padding: .3em;
+}
+
+.job__apply>button:hover{
+	background-color: #009aee;
+	color: white;
+}

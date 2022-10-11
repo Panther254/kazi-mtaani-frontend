@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "../styles/ProfileContent.css";
 import Cookies from "js-cookie";
-import { useStateValue } from '../DataStore'
-import { actionTypes } from '../reducer'
+import { useStateValue } from "../DataStore";
+import { actionTypes } from "../reducer";
 
 function ProfileContent({ profile }) {
-	const [ , dispatch] = useStateValue();
+	const [, dispatch] = useStateValue();
 	const initialState = {
 		username: "",
 		email: "",
@@ -32,13 +32,14 @@ function ProfileContent({ profile }) {
 			"You Are About To Change Your Details, Are You Sure?"
 		);
 		if (yes) {
-			
-			const names = state.username.split(" ");
-			
+			const names = state.username.trim().split(" ");
+
+			// console.log('names', names)
+
 			let lastName = "";
-			
+
 			names.forEach((name) => {
-				if(name !== names[0])
+				if (name !== names[0])
 					lastName = lastName.concat(name).concat(" ");
 			});
 
@@ -54,32 +55,37 @@ function ProfileContent({ profile }) {
 
 			const config = {
 				headers: {
-					'Accept': "application/json",
-					'Content-Type': "application/json",
-					'X-CSRFToken': Cookies.get("csrftoken"),
+					Accept: "application/json",
+					"Content-Type": "application/json",
+					"X-CSRFToken": Cookies.get("csrftoken"),
 				},
 			};
-			
-			const res = await axios.patch(
-				"http://localhost:8000/users/profile",
-				body,
-				config
-			);
 
-			console.log("Respose obejct: ",res)
+			try {
+				const res = await axios.patch(
+					"http://localhost:8000/users/profile",
+					body,
+					config
+				);
 
-			if (res.data.error) {
-				alert(res.data.error)
-			} else {
-				console.log("Update profile Data from server: ", res.data)
-				dispatch({
-					type: actionTypes.PROFILEUPDATE_SUCCESS,
-					payload: {
-						isAuthenticated: true,
-						profile: res.data
-					}
-				})
+				// console.log("Respose obejct: ", res);
 
+				if (res.data.error) {
+					// console.log(res.data.error);
+					alert("Error updating profile.")
+				} else {
+					console.log("Update profile Data from server: ", res.data.success);
+					dispatch({
+						type: actionTypes.PROFILEUPDATE_SUCCESS,
+						payload: {
+							isAuthenticated: true,
+							profile: res.data.update,
+						},
+					});
+				}
+			} catch (error) {
+				console.log(error)
+				alert(error);
 			}
 		}
 	};
@@ -92,12 +98,12 @@ function ProfileContent({ profile }) {
 			username: `${first_name} ${last_name}`,
 			email: email,
 			phoneNumber: phone_number,
-			residence: residence === null ? "":residence,
+			residence: residence === null ? "" : residence,
 			editable: false,
 		};
 
 		setState(initialState1);
-	}, [state.reset,profile]);
+	}, [state.reset, profile]);
 
 	return (
 		<div className="JobSeekerProfile">

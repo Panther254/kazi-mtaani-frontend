@@ -35,11 +35,12 @@ function Profile() {
 		selectedRow: "",
 		jobUpdate: false,
 		acceptApplications: false,
-		selectedJob: {},
+		selectedJob: null,
 	});
 
 	const updateJob = (e) => {
 		e.preventDefault();
+		console.log('state.selectedRow', state.selectedRow)
 		setState({ ...state, jobUpdate: true, acceptApplications: false });
 	};
 
@@ -88,6 +89,11 @@ function Profile() {
 			}
 		}
 	};
+	// useEffect(() => {
+	// 	return () => {
+	// 		effect
+	// 	};
+	// }, [state.])
 
 	return (
 		<div className="Profile">
@@ -256,7 +262,7 @@ function Profile() {
 				overlayClassName="Overlay"
 				appElement={document.getElementById("root")}
 			>
-				<UpdateJob jobDetails={state.selectedJob} />
+				<UpdateJob jobDetails={state.selectedJob} handler={setState}/>
 				<button
 					onClick={(e) => setState({ ...state, jobUpdate: false })}
 				>
